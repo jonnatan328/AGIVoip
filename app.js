@@ -7,17 +7,24 @@ const querystring = require('querystring');
 
 function handler(context) {
   // console.log(this.params.hi);
-  var conn = Connection.getConnection();
-  conn.query('SELECT * from user', function(error, results, fields) {
-    if (error) throw error;
-    console.log('The solution is: ', results[0]);
+  // var conn = Connection.getConnection();
+  // conn.query('SELECT * from user', function(error, results, fields) {
+    // if (error) throw error;
+    // console.log('The solution is: ', results[0]);
     // conn.end()
-  });
+  // });
+  var fileName = 'data/hello.mp3';
+
   context.onEvent('variables')
     .then(function(vars) {
-      return context.streamFile('beep');
+      context.streamFile('beep');
+      return tts({
+        text: 'Buenos días compadre!',
+        file: fileName
+      });
     })
     .then(function(result) {
+      context.streamFile(fileName);
       return context.setVariable('RECOGNITION_RESULT', 'I\'m your father, Luc');
     })
     .then(function(result) {
@@ -29,9 +36,9 @@ function handler(context) {
     file: fileName
   }, function() {
     console.log('done');
+    context.streamFile(this.fileName);
   });
 
-  context.streamFile(this.fileName);
 
   //
   // Connection.finishConnection();
