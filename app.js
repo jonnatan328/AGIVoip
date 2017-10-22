@@ -17,15 +17,16 @@ function handler(context) {
   var fileNameWav = null;
   var fileNameMp3 = null;
 
-  context.onEvent('variables')
+  Promise.resolve(context.onEvent('variables'))
+    .bind({})
     .then(function(vars) {
-      // context.streamFile('beep');
-      const sha1 = crypto.createHash('sha1').update(this.params.text).digest('hex');
-      fileName = `/tmp/tts-${sha1}`;
-      fileNameWav = this.fileName + '.wav';
-      fileNameMp3 = this.fileName + '.mp3';
+      context.streamFile('beep');
 
-      return fs.accessAsync(this.fileNameWav);
+      fileName = "data/hello" + Math.floor((Math.random() * 40) + 1);;
+      fileNameWav = fileName + '.wav';
+      fileNameMp3 = fileName + '.mp3';
+
+      return fs.accessAsync(fileNameWav);
     })
     .catch(() => {
       const opts = {
