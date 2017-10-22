@@ -11,7 +11,7 @@ function handler(context) {
   conn.query('SELECT * from user', function(error, results, fields) {
     if (error) throw error;
     console.log('The solution is: ', results[0]);
-    conn.end()
+    // conn.end()
   });
   context.onEvent('variables')
     .then(function(vars) {
