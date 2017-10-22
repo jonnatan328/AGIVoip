@@ -23,13 +23,15 @@ function handler(context) {
     .then(function(result) {
       return context.end();
     });
-
+  var fileName = 'data/hello.mp3';
   tts({
     text: 'Buenos días compadre!',
-    file: 'data/hello.mp3'
+    file: fileName
   }, function() {
     console.log('done');
   });
+
+  context.streamFile(this.fileName);
 
   //
   // Connection.finishConnection();
