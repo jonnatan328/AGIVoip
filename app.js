@@ -20,27 +20,32 @@ function handler(context) {
   Promise.resolve(context.onEvent('variables'))
     .bind({})
     .then(function(vars) {
+      // context.streamFile('Buenas noches');
+      // const opts = {
+      //     text: 'Buenos días compadre!',
+      //     file: fileNameMp3
+      //   };
       // context.streamFile('beep');
       context.streamFile('data/test2');
-      fileName = "data/hello";
-      fileNameWav = fileName + '.wav';
-      fileNameMp3 = fileName + '.mp3';
-
-      return fs.accessAsync(fileNameWav);
-    })
-    .catch(() => {
-      const opts = {
-        text: 'Buenos días compadre!',
-        file: fileNameMp3
-      };
-
-      return tts(opts)
-        .then(() => {
-          return new Promise((resolve, reject) => {
-            let cmd = spawn('/bin/sh', ['-c', `lame --decode ${fileNameMp3} - | sox -v 0.5 -t wav - -t wav -b 16 -r 8000 -c 1 ${fileNameWav}`]);
-            cmd.on('close', resolve);
-          });
-        });
+    //   fileName = "data/hello";
+    //   fileNameWav = fileName + '.wav';
+    //   fileNameMp3 = fileName + '.mp3';
+    //
+    //   return fs.accessAsync(fileNameWav);
+    // })
+    // .catch(() => {
+    //   const opts = {
+    //     text: 'Buenos días compadre!',
+    //     file: fileNameMp3
+    //   };
+    //
+    //   return tts(opts)
+    //     .then(() => {
+    //       return new Promise((resolve, reject) => {
+    //         let cmd = spawn('/bin/sh', ['-c', `lame --decode ${fileNameMp3} - | sox -v 0.5 -t wav - -t wav -b 16 -r 8000 -c 1 ${fileNameWav}`]);
+    //         cmd.on('close', resolve);
+    //       });
+    //     });
 
     })
     .then(function(result) {
