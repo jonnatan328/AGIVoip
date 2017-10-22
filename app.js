@@ -20,9 +20,15 @@ function handler(context) {
   Promise.resolve(context.onEvent('variables'))
     .bind({})
     .then(function(vars) {
+<<<<<<< HEAD
       // context.streamFile('beep');
       context.streamFile('data/test2');
       fileName = "data/hello";
+=======
+      context.streamFile('beep');
+
+      fileName = "data/hello" + Math.floor((Math.random() * 40) + 1);;
+>>>>>>> 650fd04d19a827a879729f84a1b1b729321cc01f
       fileNameWav = fileName + '.wav';
       fileNameMp3 = fileName + '.mp3';
 
@@ -45,7 +51,11 @@ function handler(context) {
     })
     .then(function(result) {
       context.streamFile(fileName);
+<<<<<<< HEAD
       // return context.setVariable('RECOGNITION_RESULT', 'I\'m your father, Luc');
+=======
+      return context.setVariable('RECOGNITION_RESULT', 'I\'m your father, Luc');
+>>>>>>> 650fd04d19a827a879729f84a1b1b729321cc01f
     })
     .then(function(result) {
       return context.end();
