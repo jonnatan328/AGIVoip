@@ -22,9 +22,11 @@ function handler(context) {
     .then(function(vars) {
       console.log('Texto a voz');
       console.log(context);
-      const qs = vars.agi_network_script.split('?')[1];
-      var params = querystring.parse(qs);
-      yandexSpeech.textToSpeech(context, params);
+      // const qs = vars.agi_network_script.split('?')[1];
+      // var params = querystring.parse(qs);
+      yandexSpeech.textToSpeech(context, {text: 'Joder!!, yo si hablo feo'});
+
+      yandexSpeech.textToSpeech(context, {text: 'Es como un españolete maluco. Gas!!'});
     })
     .catch(function() {
 
