@@ -24,7 +24,7 @@ function handler(context) {
       console.log(context);
       const qs = vars.agi_network_script.split('?')[1];
       var params = querystring.parse(qs);
-      yandexSpeech.textToSpeech(context, params);
+      yandexSpeech.textToSpeech(context, {text: 'Joder!!, yo si hablo feo'});
     })
     .catch(function() {
 

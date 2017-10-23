@@ -9,7 +9,7 @@ const spawn = require('child_process').spawn;
 module.exports = {
   textToSpeech: function(context, params) {
         console.log("context" + context);
-        console.log("Params: " + params);
+        console.log(params);
         const sha1 = crypto.createHash('sha1').update(params.text).digest('hex');
         var fileName = `/tmp/tts-${sha1}`;
         console.log("File name: " + fileName);
