@@ -35,8 +35,6 @@ module.exports = {
       .then(function() {
         return context.streamFile(fileName);
       })
-      .then(function() {
-        return context.end();
-      });
+      
   }
 };
