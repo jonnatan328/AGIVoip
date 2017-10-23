@@ -6,27 +6,29 @@ const tts = Promise.promisify(require('yandex-speech').TTS);
 const querystring = require('querystring');
 const crypto = require('crypto');
 const spawn = require('child_process').spawn;
-const yandexSpeech = require('./yandex');
+const textToSpeech = Promise.promisify(require('./yandex').textToSpeech);
 
 function handler(context) {
   // console.log(this.params.hi);
-  // var conn = Connection.getConnection();
-  // conn.query('SELECT * from user', function(error, results, fields) {
-  // if (error) throw error;
-  // console.log('The solution is: ', results[0]);
-  // conn.end()
-  // });
+   
 
   Promise.resolve(context.onEvent('variables'))
     .bind({})
     .then(function(vars) {
       console.log('Texto a voz');
-      return yandexSpeech.textToSpeech(context, {text: 'Joder!!, yo si hablo feo'});
-
+      textToSpeech(context, {text: 'Bienvenido!!, Por este medio podrá consultar el estado de su pedido.'}, 'sendSpeech');
+      setTimeout(function () {	
+	textToSpeech(context, {text: 'Por favor ingrese el código del pedido y finalice con la tecla número.'}, 'getData')
+	//context.waitForDigit(4000)
+	//.then((digit) => {
+	  //console.log(digit)
+	  //context.sayNumber(digit);
+	//})
+        //context.sayNumber(43);
+      }, 6000);
     })
     .then((status) => {
       console.log(status);
-      yandexSpeech.textToSpeech(context, {text: 'Es como un españolete maluco. Gas!!'});
     })
     .then(function() {
       // return context.end();
@@ -34,6 +36,7 @@ function handler(context) {
     .catch(function() {
 
     })
+   
 }
 
 var agi = new AgiServer(handler);
