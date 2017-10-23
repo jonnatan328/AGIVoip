@@ -21,10 +21,12 @@ function handler(context) {
     .bind({})
     .then(function(vars) {
       console.log('Texto a voz');
-      console.log(context);
-      const qs = vars.agi_network_script.split('?')[1];
-      var params = querystring.parse(qs);
-      yandexSpeech.textToSpeech(context, {text: 'Joder!!, yo si hablo feo'});
+      return yandexSpeech.textToSpeech(context, {text: 'Joder!!, yo si hablo feo'});
+
+    })
+    .then((status) => {
+      console.log(status);
+      yandexSpeech.textToSpeech(context, {text: 'Es como un españolete maluco. Gas!!'});
     })
     .catch(function() {
 
