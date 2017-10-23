@@ -15,60 +15,7 @@ function handler(context) {
     // console.log('The solution is: ', results[0]);
     // conn.end()
   // });
-  // var fileName = null;
-  // var fileNameWav = null;
-  // var fileNameMp3 = null;
 
-  // Promise.resolve(context.onEvent('variables'))
-  //   .bind({})
-  //   .then(function(vars) {
-  //     // context.streamFile('Buenas noches');
-  //     // const opts = {
-  //     //     text: 'Buenos días compadre!',
-  //     //     file: fileNameMp3
-  //     //   };
-  //     // context.streamFile('beep');
-  //     context.streamFile('data/test2');
-  //   //   fileName = "data/hello";
-  //   //   fileNameWav = fileName + '.wav';
-  //   //   fileNameMp3 = fileName + '.mp3';
-  //   //
-  //   //   return fs.accessAsync(fileNameWav);
-  //   // })
-  //   // .catch(() => {
-  //   //   const opts = {
-  //   //     text: 'Buenos días compadre!',
-  //   //     file: fileNameMp3
-  //   //   };
-  //   //
-  //   //   return tts(opts)
-  //   //     .then(() => {
-  //   //       return new Promise((resolve, reject) => {
-  //   //         let cmd = spawn('/bin/sh', ['-c', `lame --decode ${fileNameMp3} - | sox -v 0.5 -t wav - -t wav -b 16 -r 8000 -c 1 ${fileNameWav}`]);
-  //   //         cmd.on('close', resolve);
-  //   //       });
-  //   //     });
-  //
-  //   })
-  //   .then(function(result) {
-  //     context.streamFile(fileName);
-  //     // return context.setVariable('RECOGNITION_RESULT', 'I\'m your father, Luc');
-  //   })
-  //   .then(function(result) {
-  //     return context.end();
-  //   });
-  // // var fileName = 'data/hello.mp3';
-  // // tts({
-  // //   text: 'Buenos días compadre!',
-  // //   file: fileName
-  // // }, function() {
-  // //   console.log('done');
-  // //   context.streamFile(this.fileName);
-  // // });
-
-
-  //
-  // Connection.finishConnection();
   Promise.resolve(context.onEvent('variables'))
     .bind({})
     .then(function (vars) {
@@ -96,7 +43,11 @@ function handler(context) {
         });
     })
     .then(function () {
-      return context.streamFile(this.fileName);
+      context.streamFile(this.fileName);
+      return context.waitForDigit()
+    })
+    .then(function () {
+
     })
     .then(function () {
       return context.end();
