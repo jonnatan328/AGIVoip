@@ -8,14 +8,11 @@ const spawn = require('child_process').spawn;
 
 module.exports = {
   textToSpeech: function(context, params) {
-        console.log("context" + context);
         console.log(params);
         const sha1 = crypto.createHash('sha1').update(params.text).digest('hex');
         var fileName = `/tmp/tts-${sha1}`;
-        console.log("File name: " + fileName);
         var fileNameWav = fileName + '.wav';
         var fileNameMp3 = fileName + '.mp3';
-        console.log("fileNameMp3 1: " + fileNameMp3);
 
         fs.accessAsync(fileNameWav)
       .catch(function() {
@@ -35,6 +32,6 @@ module.exports = {
       .then(function() {
         return context.streamFile(fileName);
       })
-      
+
   }
 };
