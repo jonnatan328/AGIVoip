@@ -7,17 +7,15 @@ const spawn = require('child_process').spawn;
 
 module.exports = {
   textToSpeech: function (context, text) {
-    Promise.resolve(context.onEvent('variables'))
-      .bind({})
-      .then(function (vars) {
+
         this.params = text;
+        console.log(this.params.text);
         const sha1 = crypto.createHash('sha1').update(this.params.text).digest('hex');
         this.fileName = `/tmp/tts-${sha1}`;
         this.fileNameWav = this.fileName + '.wav';
         this.fileNameMp3 = this.fileName + '.mp3';
 
-        return fs.accessAsync(this.fileNameWav);
-      })
+      fs.accessAsync(this.fileNameWav)
       .catch(function () {
         const opts = {
           text: this.params.text,
