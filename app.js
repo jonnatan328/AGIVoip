@@ -28,6 +28,9 @@ function handler(context) {
       console.log(status);
       yandexSpeech.textToSpeech(context, {text: 'Es como un españolete maluco. Gas!!'});
     })
+    .then(function() {
+      // return context.end();
+    })
     .catch(function() {
 
     })
