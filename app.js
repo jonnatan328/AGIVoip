@@ -12,19 +12,21 @@ function handler(context) {
   // console.log(this.params.hi);
   // var conn = Connection.getConnection();
   // conn.query('SELECT * from user', function(error, results, fields) {
-    // if (error) throw error;
-    // console.log('The solution is: ', results[0]);
-    // conn.end()
+  // if (error) throw error;
+  // console.log('The solution is: ', results[0]);
+  // conn.end()
   // });
 
   Promise.resolve(context.onEvent('variables'))
     .bind({})
-    .then(function (vars) {
+    .then(function(vars) {
       console.log('Texto a voz');
       console.log(context);
-      yandexSpeech.textToSpeech(context, {text:'hola que tal'});
+      const qs = vars.agi_network_script.split('?')[1];
+      var params = querystring.parse(qs);
+      yandexSpeech.textToSpeech(context, params);
     })
-    .catch(function () {
+    .catch(function() {
 
     })
 }

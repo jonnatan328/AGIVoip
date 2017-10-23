@@ -6,10 +6,11 @@ const crypto = require('crypto');
 const spawn = require('child_process').spawn;
 
 module.exports = {
-  textToSpeech: function (context, text) {
-        console.log("context" + context);
-        this.params = text;
-        console.log("Params: " + this.params.text);
+  textToSpeech: function(context, params) {
+        console.log(context);
+	console.log(params)
+	this.params = params;
+        console.log("Params: " + this.params);
         const sha1 = crypto.createHash('sha1').update(this.params.text).digest('hex');
         this.fileName = `/tmp/tts-${sha1}`;
         console.log("File name: " + fileName);
@@ -17,8 +18,8 @@ module.exports = {
         this.fileNameMp3 = this.fileName + '.mp3';
         console.log("fileNameMp3 1: " + fileNameMp3);
 
-      fs.accessAsync(this.fileNameWav)
-      .catch(function () {
+        fs.accessAsync(this.fileNameWav)
+      .catch(function() {
         console.log("fileNameMp3 2: " + fileNameMp3);
         const opts = {
           text: this.params.text,
@@ -32,10 +33,10 @@ module.exports = {
             });
           });
       })
-      .then(function () {
+      .then(function() {
         return context.streamFile(this.fileName);
       })
-      .then(function () {
+      .then(function() {
         return context.end();
       });
   }
