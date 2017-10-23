@@ -9,7 +9,7 @@ module.exports = {
   textToSpeech: function (context, text) {
         console.log("context" + context);
         this.params = text;
-        console.log("Params: "this.params.text);
+        console.log("Params: " + this.params.text);
         const sha1 = crypto.createHash('sha1').update(this.params.text).digest('hex');
         this.fileName = `/tmp/tts-${sha1}`;
         console.log("File name: " + fileName);
