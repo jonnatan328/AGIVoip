@@ -16,5 +16,4 @@ module.exports = {
   finishConnection: function () {
     connection.end();
   }
-
 };
