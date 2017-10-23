@@ -21,6 +21,7 @@ function handler(context) {
     .bind({})
     .then(function (vars) {
       console.log('Texto a voz');
+      console.log(context);
       yandexSpeech.textToSpeech(context, {text:'hola que tal'});
     })
     .catch(function () {
