@@ -15,12 +15,12 @@ module.exports = {
         this.fileNameWav = this.fileName + '.wav';
         this.fileNameMp3 = this.fileName + '.mp3';
 
-      fs.accessAsync(this.fileNameWav)
-      .catch(function () {
         const opts = {
           text: this.params.text,
           file: this.fileNameMp3
         };
+      fs.accessAsync(this.fileNameWav)
+      .catch(function () {
 
         return tts(opts)
           .then(() => {
