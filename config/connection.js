@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'jrv92328',
-  database : 'ordersFournee'
+  host: 'imagenanddesign.com',
+  user: 'imagenan_fournee',
+  password: 'L@Fourn33',
+  database : 'imagenan_lafournee'
 });
 
 module.exports = {
